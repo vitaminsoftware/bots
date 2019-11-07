@@ -12,6 +12,9 @@ RUN apt-get install -y python
 RUN apt-get install -y python-dev
 RUN apt-get install -y python-distribute
 RUN apt-get install -y python-pip
+RUN apt-get install -y python-mysqldb
+RUN apt-get install -y python-psycopg2
+RUN apt-get install -y sqlite3
 RUN pip install --upgrade pip
 
 # Copy requirements from source
