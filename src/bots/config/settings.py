@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
 
+# Django settings for bots project.
 from __future__ import unicode_literals
+
+import ast
 import os
+
 import bots
+
 # Django settings for bots project.
 PROJECT_PATH = os.path.abspath(os.path.dirname(bots.__file__))
 
 #*******settings for sending bots error reports via email**********************************
 MANAGERS = (    #bots will send error reports to the MANAGERS
-    ('name_manager', 'adress@test.com'),
+    ('name_manager', os.environ.get('ADMIN_EMAIL', 'hello@example.com')),
     )
 EMAIL_HOST = 'localhost'             #Default: 'localhost'
 EMAIL_PORT = '25'             #Default: 25
@@ -44,17 +49,29 @@ EMAIL_HOST_PASSWORD = ''    #Default: ''. PASSWORD to use for the SMTP server de
         #~ }
     #~ }
 #~ #PostgreSQL:
+#~ DATABASES = {
+    #~ 'default': {
+        #~ 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #~ 'NAME': 'botsdb',
+        #~ 'USER': 'bots',
+        #~ 'PASSWORD': 'botsbots',
+        #~ 'HOST': '127.0.0.1',
+        #~ 'PORT': '5432',
+        #~ 'OPTIONS': {},
+        #~ }
+    #~ }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'botsdb',
-        'USER': 'bots',
-        'PASSWORD': 'botsbots',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-        'OPTIONS': {},
-        }
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DB_NAME', os.path.join(PROJECT_PATH, 'botssys/sqlitedb/botsdb')),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''),
+        'PORT': os.environ.get('DB_PORT', ''),
+        'OPTIONS': ast.literal_eval(os.environ.get('DB_OPTIONS', '{}')),
     }
+}
 
 #*********setting date/time zone and formats *************************
 # Local time zone for this installation. Choices can be found here:

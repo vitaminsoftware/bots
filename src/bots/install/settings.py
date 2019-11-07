@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 
 # Django settings for bots project.
+from __future__ import unicode_literals
+
+import ast
 import os
+
 import bots
+
+# Django settings for bots project.
 PROJECT_PATH = os.path.abspath(os.path.dirname(bots.__file__))
 
 #*******settings for sending bots error reports via email**********************************
 MANAGERS = (    #bots will send error reports to the MANAGERS
-    ('name_manager', 'adress@test.com'),
+    ('name_manager', os.environ.get('ADMIN_EMAIL', 'hello@example.com')),
     )
 EMAIL_HOST = 'localhost'             #Default: 'localhost'
 EMAIL_PORT = '25'             #Default: 25
@@ -19,17 +25,17 @@ EMAIL_HOST_PASSWORD = ''    #Default: ''. PASSWORD to use for the SMTP server de
 
 #*********database settings*************************
 #SQLite database (default bots database)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_PATH, 'botssys/sqlitedb/botsdb'),
-        'USER': '',         #not needed for SQLite
-        'PASSWORD': '',     #not needed for SQLite
-        'HOST': '',         #not needed for SQLite
-        'PORT': '',         #not needed for SQLite
-        'OPTIONS': {},      #not needed for SQLite
-        }
-    }
+#~ DATABASES = {
+    #~ 'default': {
+        #~ 'ENGINE': 'django.db.backends.sqlite3',
+        #~ 'NAME': os.path.join(PROJECT_PATH, 'botssys/sqlitedb/botsdb'),
+        #~ 'USER': '',         #not needed for SQLite
+        #~ 'PASSWORD': '',     #not needed for SQLite
+        #~ 'HOST': '',         #not needed for SQLite
+        #~ 'PORT': '',         #not needed for SQLite
+        #~ 'OPTIONS': {},      #not needed for SQLite
+        #~ }
+    #~ }
 #MySQL:
 #~ DATABASES = {
     #~ 'default': {
@@ -54,6 +60,18 @@ DATABASES = {
         #~ 'OPTIONS': {},
         #~ }
     #~ }
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DB_NAME', os.path.join(PROJECT_PATH, 'botssys/sqlitedb/botsdb')),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''),
+        'PORT': os.environ.get('DB_PORT', ''),
+        'OPTIONS': ast.literal_eval(os.environ.get('DB_OPTIONS', '{}')),
+    }
+}
 
 #*********setting date/time zone and formats *************************
 # Local time zone for this installation. Choices can be found here:
