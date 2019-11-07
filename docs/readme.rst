@@ -32,8 +32,8 @@ Bots-Edi
 
 
 
-
-
+Disclaimer: 
+This repo is a slightly modified version of [Bots-Edi](https://github.com/bots-edi/bots) which in turn is a continuation of the original [Bots](http://bots.sourceforge.net/en/index.shtml) software.
 
 Bots is complete software for EDI (Electronic Data Interchange)
 Bots-Edi is a free, open-source EDI translator. It has the following features:
@@ -56,6 +56,16 @@ Getting Started
 
 The documentation_ is a great place to get
 started.
+
+Quickstart: 
+
+1) This version of Bots is pre-configured to run within a local Docker container:
+```
+$ cp .env.example .env # if running for the first time
+$ docker-compose up --build
+```
+
+2) Point your browser to http://localhost:8080/ and use the credentials `admin_` / `prettygoodpassword`.
 
 License
 -------
