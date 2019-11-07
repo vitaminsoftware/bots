@@ -33,9 +33,12 @@ Bots-Edi
 
 
 Disclaimer: 
-This repo is a slightly modified version of [Bots-Edi](https://github.com/bots-edi/bots) which in turn is a continuation of the original [Bots](http://bots.sourceforge.net/en/index.shtml) software.
+This repo is a slightly modified version of `Bots-Edi
+<https://github.com/bots-edi/bots>`_ which in turn is a continuation of the original `Bots
+<http://bots.sourceforge.net/en/index.shtml>`_ software.
 
-Bots is complete software for EDI (Electronic Data Interchange)
+Bots is a complete software for EDI (Electronic Data Interchange)
+
 Bots-Edi is a free, open-source EDI translator. It has the following features:
 
 ::
@@ -60,12 +63,13 @@ started.
 Quickstart: 
 
 1) This version of Bots is pre-configured to run within a local Docker container:
-```
-$ cp .env.example .env # if running for the first time
-$ docker-compose up --build
-```
 
-2) Point your browser to http://localhost:8080/ and use the credentials `admin_` / `prettygoodpassword`.
+``$ cp .env.example .env # if running for the first time``
+
+``$ docker-compose up --build``
+
+
+2) Point your browser to http://localhost:8080/ and use the credentials ``admin_`` / ``prettygoodpassword``.
 
 License
 -------
