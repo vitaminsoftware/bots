@@ -1,22 +1,15 @@
-version: '2'
-
-# Purpose is to test compatibility in Python 2.7 and Python 3.4
-# TODO: add tests
-# Brings up two machines, one with python 3.4 one with python 2.7
-# Database by SQLITE
-# Config settings copied from install
+version: '3'
 
 services:
-  bots34:
+  bots-complete:
     build:
       context: .
-      dockerfile: ./compose/bots_py34/Dockerfile
+      dockerfile: ./compose/bots_complete/Dockerfile
     ports:
       - "0.0.0.0:8080:8080"
-  bots27:
-    build:
-      context: .
-      dockerfile: ./compose/bots_py27/Dockerfile
-    ports:
-      - "0.0.0.0:8081:8080"
-
+      - "0.0.0.0:9001:9001"
+    env_file:
+      - .env
+    volumes:
+      - ./src/bots/usersys:/usr/local/lib/python2.7/dist-packages/bots/usersys
+    command: /bots/compose/bots_complete/docker-entrypoint.sh
