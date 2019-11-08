@@ -1798,7 +1798,7 @@ class db(_comsession):
             try:
                 ta_from = botslib.OldTransaction(row[str('idta')])
                 ta_to = ta_from.copyta(status=EXTERNOUT)
-                db_object = botslib.readdata_pickled(filename=self.ta_info['filename'])
+                db_object = botslib.readdata_pickled(filename=row[str('filename')])
                 botslib.runscript(self.userscript, self.scriptname, 'outcommunicate',
                                   channeldict=self.channeldict, dbconnection=self.dbconnection, db_object=db_object)
             except:
