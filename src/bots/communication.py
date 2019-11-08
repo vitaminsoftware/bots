@@ -1540,9 +1540,12 @@ class sftp(_comsession):
         remove_ta = False
         for fromfilename in lijst:  # fetch messages from sftp-server.
             try:
+                fileinfo = self.session.stat(fromfilename)
                 ta_from = botslib.NewTransaction(filename='sftp:/' + posixpath.join(self.dirpath, fromfilename),
                                                  status=EXTERNIN,
                                                  fromchannel=self.channeldict['idchannel'],
+                                                 filesize=fileinfo.st_size,
+                                                 rsrv1=fileinfo.st_mtime,
                                                  idroute=self.idroute)
                 ta_to = ta_from.copyta(status=FILEIN)
                 remove_ta = True
