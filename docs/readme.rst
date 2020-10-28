@@ -33,7 +33,8 @@ Bots-Edi
 
 
 Disclaimer: 
-This repo is a slightly modified version of `Bots-Edi
+This `repository
+<https://github.com/vitaminsoftware/bots>`_  is a slightly modified version of `Bots-Edi
 <https://github.com/bots-edi/bots>`_ which in turn is a continuation of the original `Bots
 <http://bots.sourceforge.net/en/index.shtml>`_ software.
 
