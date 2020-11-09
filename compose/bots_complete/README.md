@@ -66,4 +66,4 @@ Read more here: [Supervisord.org](http://supervisord.org)
 
 ## crontab
 The crontab file is copied to the bots/config directory from where the dev-cron is started. When the file is changed, the service may require to be restarted to get the updates (untested..., but definitly if the host is shared from the host). 
-Read more here: [DevCron](https://bitbucket.org/dbenamy/devcron/overview)
+Read more here: [DevCron](https://github.com/dbenamy/devcron)

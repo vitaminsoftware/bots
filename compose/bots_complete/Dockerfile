@@ -46,8 +46,7 @@ RUN python /bots/postinstall.py
 
 
 # Install DevCron
-# failed, missing hg/mercurial : RUN pip install -e hg+https://bitbucket.org/dbenamy/devcron#egg=devcron
-RUN pip install https://bitbucket.org/dbenamy/devcron/get/tip.tar.gz
+RUN pip install devcron==0.4
 
 # Copy Supervisord.conf file
 COPY ./compose/bots_complete/supervisord.conf /etc/supervisor/supervisord.conf
