@@ -1,0 +1,6 @@
+[client]
+# RDS IAM authentication requires clear text passwords sent through SSL.
+#
+# This line enables the `mysql_clear_password` plugin for MySQL clients.
+# MariaDB has it enabled by default and will use it when asked by the server.
+enable-cleartext-plugin=1
