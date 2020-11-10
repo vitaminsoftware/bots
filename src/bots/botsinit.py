@@ -201,6 +201,30 @@ def connect():
                                          password=botsglobal.settings.DATABASES['default']['PASSWORD'],
                                          connection_factory=psycopg2.extras.DictConnection)
         botsglobal.db.set_client_encoding('UNICODE')
+    elif botsglobal.settings.DATABASES['default']['ENGINE'] == 'bots.aws.rds.mysql':
+        import boto3
+        import MySQLdb
+        from MySQLdb import cursors
+
+        region = botsglobal.settings.DATABASES['default']['OPTIONS']['aws_region']
+        rds_client = boto3.client('rds', region_name=region)
+        rds_passwd = rds_client.generate_db_auth_token(
+            DBHostname=botsglobal.settings.DATABASES['default']['HOST'],
+            Port=botsglobal.settings.DATABASES['default']['PORT'],
+            DBUsername=botsglobal.settings.DATABASES['default']['USER'],
+        )
+        # Remove `aws_region` since it's not expected by MySQLdb.
+        options = {k: v for k, v in
+                   botsglobal.settings.DATABASES['default']['OPTIONS'].items()
+                   if k != 'aws_region'}
+
+        botsglobal.db = MySQLdb.connect(host=botsglobal.settings.DATABASES['default']['HOST'],
+                                        port=int(botsglobal.settings.DATABASES['default']['PORT']),
+                                        db=botsglobal.settings.DATABASES['default']['NAME'],
+                                        user=botsglobal.settings.DATABASES['default']['USER'],
+                                        passwd=rds_passwd,
+                                        cursorclass=cursors.DictCursor,
+                                        **options)
     else:
         raise botslib.PanicError('Unknown database engine "%(engine)s".', {
                                  'engine': botsglobal.settings.DATABASES['default']['ENGINE']})
