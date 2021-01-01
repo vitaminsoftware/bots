@@ -1,6 +1,6 @@
 CherryPy==6.0.1
 click==6.6
-Django==1.7.11
+Django==1.11.29
 future==0.16.0
 six==1.10.0
 xlrd==1.0.0
